@@ -1,6 +1,6 @@
 # SESSION_LOG — Canadian Digital Railway (CDR)
 
-**Last updated:** 2026-04-02 ~20:00 UTC by Barney (Session 1 — project setup)
+**Last updated:** 2026-04-02 ~21:00 UTC by Barney (Session 1 — project setup)
 **Purpose:** When starting a new chat with Barney for CDR, point him here first.
 **Location:** `hazeydata/cdr/SESSION_LOG.md` (canonical)
 
@@ -14,13 +14,15 @@
 
 **Who uses it / who buys it:** GC federal departments (Protected B), provincial/territorial governments, municipalities, healthcare organizations, universities, crown corporations, private sector, non-profits. Each gets a compliance profile tailored to their security context.
 
-**How we got here:** CDR was conceived as a parallel track to ACCORD — same architectural DNA (encoding institutional rules as machine-readable standards) but applied to security/compliance policies instead of collective agreements. The project was bootstrapped in mid-March 2026 with a v2 draft including BOOTSTRAP.md (node onboarding protocol), compliance profiles, adapter templates, and pitch materials. A GC Code audit, NemoClaw impact analysis, and sovereignty gap analysis were completed to map the landscape. HICC proof of concept was identified as the first external deployment target.
+**How we got here:** CDR was conceived as a parallel track to ACCORD — same architectural DNA (encoding institutional rules as machine-readable standards) but applied to security/compliance policies instead of collective agreements. The project was bootstrapped in mid-March 2026 with a v2 draft including BOOTSTRAP.md (node onboarding protocol), compliance profiles, adapter templates, and pitch materials. A GC Code audit, NemoClaw impact analysis, and sovereignty gap analysis were completed to map the landscape. v3 pitch decks were built incorporating NemoClaw as the foundation layer, the sovereignty gap analysis (60% → 80%), and DGX Spark as reference hardware. HICC proof of concept was identified as the first external deployment target.
 
 **Key findings that still apply:**
 - Three operating modes (Full Access, Schema-Only Builder, Hybrid) cover all Canadian institutional security contexts
 - Schema publication creates a flywheel — publishing schemas that previously had no consumer creates demand for AI-built tools
 - "Trust but verify" principle is critical — terry must independently verify data classification, never take it at face value
 - CDR and ACCORD share architectural DNA and can cross-pollinate (compliance profiles ↔ CA rules)
+- NemoClaw is the foundation layer for CDR v3 (replaced Hypertec/ThinkOn hybrid cloud model)
+- Sovereignty gap analysis: current offerings cover ~60% of Canadian institutional requirements → CDR targets 80%+
 
 **Foundational documents:**
 | Document | Location | What |
@@ -40,7 +42,8 @@
 ## Current State
 
 **Phase:** Proof of Concept / Pre-Revenue
-**Last repo activity:** 2026-03-17 (sovereignty gap analysis committed)
+**Last repo activity before setup:** 2026-03-17 (sovereignty gap analysis committed)
+**Discord channel:** `#cdr` — `1482123040140824657`
 
 **Completed:**
 - CDR architecture designed (3 operating modes, compliance profiles, adapter system)
@@ -51,12 +54,13 @@
 - NemoClaw impact analysis completed
 - Sovereignty gap analysis completed
 - Pitch materials written (concept.md, HICC PoC)
+- v3 pitch decks built (Executive Pitch + Technical Architecture) — served from wilma-server
+- HICC Open Source Code Publishing Guidelines added as reference
 
 **Pending:**
 - HICC proof of concept (schema publication approval pending)
 - First external node deployment
 - Demo for deputy ministers
-- Discord channel setup (no #cdr channel exists yet)
 - No cron jobs, no pipelines, no API — this is concept stage
 
 **No active infrastructure.** CDR has no server processes, no database, no crons. It's documentation and architecture at this stage.
@@ -69,6 +73,7 @@
 - Created SESSION_LOG.md (this file)
 - Created PROJECT_INSTRUCTIONS_CDR.md in operations repo
 - Set up Claude Desktop project following the standard HazeyData pattern
+- Updated PROJECT_SETUP_GUIDE.md to include CDR
 - No technical work — organizational setup only
 
 ---
@@ -78,17 +83,17 @@
 | Item | Status | Details |
 |------|--------|---------|
 | HICC PoC | Pending | Awaiting schema publication approval from HICC |
-| Claude Desktop project | Just created | This session |
+| Claude Desktop project | Just created | This session — Fred adding instructions + files |
 
 ---
 
 ## Next Actions (Priority Order)
 
-1. **Fred to create #cdr Discord channel** — needed for agent comms once work begins
-2. **Fred to review this setup** — confirm SESSION_LOG, Instructions, and file selections are correct
-3. **HICC schema publication** — follow up on approval status (this is the critical gate)
-4. **When HICC approves:** Run Audit & Redesign Playbook Phase 0-3 on CDR to formalize the pipeline design
-5. **Explore ACCORD ↔ CDR synergies** — compliance profile system could share infrastructure with CA rules engine
+1. **Fred to finalize Claude Desktop project setup** — paste Instructions, add Files
+2. **HICC schema publication** — follow up on approval status (this is the critical gate)
+3. **When HICC approves:** Run Audit & Redesign Playbook Phase 0-3 on CDR to formalize the pipeline design
+4. **Explore ACCORD ↔ CDR synergies** — compliance profile system could share infrastructure with CA rules engine
+5. **Review v3 pitch decks** — update if needed for upcoming meetings
 
 ---
 
@@ -106,6 +111,7 @@
 | Adapter templates | 3 (PeopleSoft HR, SAP Finance, Generic CSV) | S1 |
 | External nodes deployed | 0 | S1 |
 | Revenue | $0 (pre-revenue) | S1 |
+| v3 pitch decks | 2 (Executive + Technical Architecture) | S1 |
 
 ---
 
@@ -127,10 +133,11 @@
 
 ## Agent Notes
 
-- CDR has no active agents yet — no Wilma/Dino work needed at concept stage
+- CDR has no active agents yet — no Dino work needed at concept stage
 - When execution begins, Dino will handle node deployment and testing
 - The BOOTSTRAP.md protocol is designed to run with local Ollama models, not Anthropic API — different from ACCORD/SSD/WTI patterns
 - Default branch is `master` (not `main`)
+- v3 pitch decks served from wilma-server at `192.168.2.75:8090` (cdr-pitch-v3.html, cdr-project-plan-v3.html)
 
 ---
 
@@ -140,7 +147,7 @@ Any agent beginning work on this project should:
 
 1. Read this file (`SESSION_LOG.md` in `hazeydata/cdr`)
 2. Read `README.md` and `BOOTSTRAP.md` in `hazeydata/cdr`
-3. Check #cdr Discord channel for messages since last update (once channel exists)
+3. Check `#cdr` Discord channel (`1482123040140824657`) for messages since last update
 4. Pick up from "Next Actions" above
 
 ---
