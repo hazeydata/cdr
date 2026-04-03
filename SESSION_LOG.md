@@ -1,6 +1,6 @@
 # SESSION_LOG — Canadian Digital Railway (CDR)
 
-**Last updated:** 2026-04-02 ~21:00 UTC by Barney (Session 1 — project setup)
+**Last updated:** 2026-04-02 ~22:00 UTC by Barney (Session 2)
 **Purpose:** When starting a new chat with Barney for CDR, point him here first.
 **Location:** `hazeydata/cdr/SESSION_LOG.md` (canonical)
 
@@ -23,6 +23,7 @@
 - CDR and ACCORD share architectural DNA and can cross-pollinate (compliance profiles ↔ CA rules)
 - NemoClaw is the foundation layer for CDR v3 (replaced Hypertec/ThinkOn hybrid cloud model)
 - Sovereignty gap analysis: current offerings cover ~60% of Canadian institutional requirements → CDR targets 80%+
+- **Every HazeyData project is a pseudo-node** — patterns built in SSD, WTI, ACCORD, and HICC are proto-CDR infrastructure (see `docs/CROSS_POLLINATION.md`)
 
 **Foundational documents:**
 | Document | Location | What |
@@ -30,6 +31,7 @@
 | README.md | cdr root | Project overview, architecture, principles |
 | BOOTSTRAP.md | cdr root | Node initialization protocol (the 15-min onboarding) |
 | principles.md | cdr root | CDR Core Principles (expanded 6 principles) |
+| CROSS_POLLINATION.md | docs/ | Maps HazeyData patterns → CDR components |
 | pitch/concept.md | cdr/pitch | Full concept document |
 | pitch/hicc-proof-of-concept.md | cdr/pitch | HICC PoC plan |
 | gc-code-audit.md | cdr root | GC Code landscape audit |
@@ -42,7 +44,7 @@
 ## Current State
 
 **Phase:** Proof of Concept / Pre-Revenue
-**Last repo activity before setup:** 2026-03-17 (sovereignty gap analysis committed)
+**Last repo activity:** 2026-04-02 (Session 2 — cross-pollination map)
 **Discord channel:** `#cdr` — `1482123040140824657`
 
 **Completed:**
@@ -56,9 +58,11 @@
 - Pitch materials written (concept.md, HICC PoC)
 - v3 pitch decks built (Executive Pitch + Technical Architecture) — served from wilma-server
 - HICC Open Source Code Publishing Guidelines added as reference
+- Cross-pollination map created (docs/CROSS_POLLINATION.md) — maps HazeyData patterns to CDR components
+- HICC Homelessness Dashboard built (Mode 2 / off-network) — Barney + Fred, outside Dino/Wilma scope
 
 **Pending:**
-- HICC proof of concept (schema publication approval pending)
+- HICC Workplace BI tool (schema publication approval pending — may move when Fred returns Tuesday)
 - First external node deployment
 - Demo for deputy ministers
 - No cron jobs, no pipelines, no API — this is concept stage
@@ -69,12 +73,17 @@
 
 ## Last Session Summary
 
+**Session 2 (2026-04-02) — Cross-Pollination + Strategic Direction**
+- Fred's key insight: each HazeyData project is a pseudo-node; mine existing code as CDR fodder
+- Created `docs/CROSS_POLLINATION.md` — maps HazeyData operational patterns to CDR architecture
+- Identified HICC Homelessness Dashboard as de facto Mode 2 CDR demo (strongest proof-of-concept material)
+- HICC Workplace BI tool: no update yet, may move Tuesday when Fred returns to office
+- No code/infrastructure work — strategic alignment session
+
 **Session 1 (2026-04-02) — Project Setup**
-- Created SESSION_LOG.md (this file)
+- Created SESSION_LOG.md
 - Created PROJECT_INSTRUCTIONS_CDR.md in operations repo
 - Set up Claude Desktop project following the standard HazeyData pattern
-- Updated PROJECT_SETUP_GUIDE.md to include CDR
-- No technical work — organizational setup only
 
 ---
 
@@ -82,24 +91,27 @@
 
 | Item | Status | Details |
 |------|--------|---------|
-| HICC PoC | Pending | Awaiting schema publication approval from HICC |
-| Claude Desktop project | Just created | This session — Fred adding instructions + files |
+| HICC Workplace BI PoC | Pending | Schema publication approval — Fred following up Tuesday |
+| HICC Homelessness Dashboard | Built | Mode 2 build by Barney + Fred (outside Dino/Wilma) |
+| Cross-pollination inventory | Complete | `docs/CROSS_POLLINATION.md` committed |
 
 ---
 
 ## Next Actions (Priority Order)
 
-1. **Fred to finalize Claude Desktop project setup** — paste Instructions, add Files
-2. **HICC schema publication** — follow up on approval status (this is the critical gate)
-3. **When HICC approves:** Run Audit & Redesign Playbook Phase 0-3 on CDR to formalize the pipeline design
-4. **Explore ACCORD ↔ CDR synergies** — compliance profile system could share infrastructure with CA rules engine
-5. **Review v3 pitch decks** — update if needed for upcoming meetings
+1. **HICC Workplace BI schema publication** — Fred to follow up Tuesday. This is still the critical gate for formal PoC.
+2. **Package HICC Homelessness Dashboard as CDR case study** — needs HICC permission. This is the strongest demo material.
+3. **When building CDR-OS:** Use CROSS_POLLINATION.md as extraction inventory — start with Playbook → Terry onboarding, ACCORD → compliance engine.
+4. **Explore ACCORD ↔ CDR shared compliance engine** — open question from cross-pollination analysis.
+5. **Review v3 pitch decks** — update if needed for upcoming meetings.
+6. **Consider Phase 0 stack decisions** — Ollama wrapper, default model (Qwen3 vs Llama 4 Scout), Terry UI approach. Not urgent until HICC gate clears or Fred decides to build ahead of it.
 
 ---
 
 ## Blockers
 
-- **HICC schema publication approval** — the first PoC depends on this. No external node can be deployed until an organization provides their schema.
+- **HICC Workplace BI schema publication approval** — the formal PoC depends on this. May move Tuesday.
+- **HICC permission to use Homelessness Dashboard as case study** — needed to package as CDR demo material.
 
 ---
 
@@ -112,6 +124,8 @@
 | External nodes deployed | 0 | S1 |
 | Revenue | $0 (pre-revenue) | S1 |
 | v3 pitch decks | 2 (Executive + Technical Architecture) | S1 |
+| HazeyData patterns mapped to CDR | 15+ (see CROSS_POLLINATION.md) | S2 |
+| De facto Mode 2 demos | 1 (HICC Homelessness Dashboard) | S2 |
 
 ---
 
@@ -120,6 +134,8 @@
 | Date | Session | Decision | Who |
 |------|---------|----------|-----|
 | 2026-04-02 | S1 | Set up CDR on Claude Desktop with standard HazeyData project structure | Fred + Barney |
+| 2026-04-02 | S2 | Treat each HazeyData project as a pseudo-node; mine patterns for CDR-OS | Fred |
+| 2026-04-02 | S2 | HICC Homelessness Dashboard is the strongest CDR demo material | Barney |
 
 ---
 
@@ -127,7 +143,7 @@
 
 | Ticket | Repo | Status | Notes |
 |--------|------|--------|-------|
-| None yet | — | — | File tickets when HICC PoC work begins |
+| None yet | — | — | File tickets when HICC PoC work or CDR-OS build begins |
 
 ---
 
@@ -138,6 +154,8 @@
 - The BOOTSTRAP.md protocol is designed to run with local Ollama models, not Anthropic API — different from ACCORD/SSD/WTI patterns
 - Default branch is `master` (not `main`)
 - v3 pitch decks served from wilma-server at `192.168.2.75:8090` (cdr-pitch-v3.html, cdr-project-plan-v3.html)
+- HICC Homelessness Dashboard was built by Barney + Fred directly, outside the Dino/Wilma pipeline
+- Fred's Phase 0 thinking: Ollama wrapper, MLX/llama.cpp for Apple Silicon, React or plain HTML/JS for Terry UI, Python/Node backend, SQLite audit log. Under $10K CAD.
 
 ---
 
@@ -146,9 +164,10 @@
 Any agent beginning work on this project should:
 
 1. Read this file (`SESSION_LOG.md` in `hazeydata/cdr`)
-2. Read `README.md` and `BOOTSTRAP.md` in `hazeydata/cdr`
-3. Check `#cdr` Discord channel (`1482123040140824657`) for messages since last update
-4. Pick up from "Next Actions" above
+2. Read `CROSS_POLLINATION.md` in `docs/`
+3. Read `README.md` and `BOOTSTRAP.md` in `hazeydata/cdr`
+4. Check `#cdr` Discord channel (`1482123040140824657`) for messages since last update
+5. Pick up from "Next Actions" above
 
 ---
 
