@@ -1,0 +1,3 @@
+# graphify (code-graph) — local artifacts, never committed (#100)
+graphify-out/
+.graphify_learning.json
