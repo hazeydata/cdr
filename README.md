@@ -1,6 +1,8 @@
 # The Canadian Digital Railway (CDR)
 
-**Sovereign AI agents helping organizations build better tools — without compromising security.**
+**Bottom-up sovereign AI: local agents ("terrys") build GC-compliant tools from published schemas. Sensitive data never leaves the org. Reusable solution recipes compound across Canada.**
+
+> **September 2026 — Phase 0 reframe.** See [`docs/VISION-2026-09.md`](docs/VISION-2026-09.md) for the full vision, [`nodes/hicc/`](nodes/hicc/) for the first demo node, and [`prototypes/org-chart-demo/`](prototypes/org-chart-demo/) for a runnable prototype.
 
 ---
 
@@ -10,7 +12,21 @@ The Canadian Digital Railway is a network of local AI agents ("terrys") that hel
 
 Think of it like hiring a new employee: they get onboarded, they learn the systems, they understand their security clearance, and they build things within those boundaries. The difference is that a terry can be onboarded in 15 minutes and start building immediately.
 
-The CDR isn't one AI. It's a **network** of sovereign AI nodes across Canada, each serving a different organization. They share knowledge, compliance standards, and best practices through CDR HQ (Node 0, "Wilma"), but each node operates independently within its own security context.
+The CDR isn't one AI. It's a **network** of sovereign AI nodes across Canada, each serving a different organization. They share knowledge and compliance standards through the recipe index, but each node operates independently within its own security context.
+
+---
+
+## Phase 0 Quick Links
+
+| Resource | Description |
+|----------|-------------|
+| [`docs/VISION-2026-09.md`](docs/VISION-2026-09.md) | Full Sep 2026 vision — thesis, landscape, roadmap |
+| [`nodes/hicc/NODE.md`](nodes/hicc/NODE.md) | Node 1 (HICC) — demo terry identity and boundaries |
+| [`recipes/gc-org-chart-peoplesoft/RECIPE.md`](recipes/gc-org-chart-peoplesoft/RECIPE.md) | First recipe — org-chart from PeopleSoft HR schema |
+| [`schemas/demo/hicc-hr-synthetic/`](schemas/demo/hicc-hr-synthetic/) | Synthetic PeopleSoft HR schema (demo, not real data) |
+| [`prototypes/org-chart-demo/`](prototypes/org-chart-demo/) | Runnable prototype — schema → org-chart |
+| [`docs/DTC-ONE-PAGER.md`](docs/DTC-ONE-PAGER.md) | DTC/ISED staffer one-pager |
+| [`BOOTSTRAP.md`](BOOTSTRAP.md) | Node initialization protocol |
 
 ---
 
@@ -23,92 +39,55 @@ Organizations across Canada — from federal departments to municipalities to he
 3. **Even when AI could help, the approval process is impossible.** Getting an AI system approved for a Protected B environment requires the kind of compliance effort only billion-dollar companies can afford.
 4. **Every organization reinvents the wheel.** A hundred departments need the same HR dashboard, and each one builds it from scratch (or doesn't build it at all).
 
-The CDR solves all four problems simultaneously.
+## The Core Idea: Mode 2 Schema-Only
+
+Terry builds tools from **published database schemas** — table names, column types, relationships — without ever seeing real data. The department deploys the finished tool on-network. Schema in → compliant tool out → data never leaves the building.
+
+Schemas were never published before because there was no consumer for them. Terry creates the demand side. Publishing a schema now results in a custom tool the next day. This creates a **flywheel**.
+
+**Solution recipes** capture how to build a tool from a schema type. They're published to an append-only index so other organizations can fork them. Solutions compound across Canada organically.
 
 ---
 
 ## How It Works
 
-### The Core Insight
-
-An AI agent gets onboarded into an organization the same way a human employee does. It learns the role, the systems, the security clearance, the restrictions — and it always respects them.
-
 ### Three Operating Modes
 
-Every CDR node operates in one of three modes, determined during onboarding based on the organization's security context:
-
-#### Mode 1: Full Access
-The terry has direct access to data. It builds tools that work with data end-to-end.
-
-**Typical for:** Small municipalities, non-profits, startups, personal use, organizations with no data classification restrictions.
-
-**How it works:** You give terry your data, terry builds your tool. Simple.
-
-#### Mode 2: Schema-Only (Builder)
-The terry is off-network with no data access. It works with **schemas** (structural metadata) only — table names, column names, data types. It builds complete, compliant tools that get deployed on-network by humans.
-
-**Typical for:** Government of Canada federal departments, provincial departments with classified data, healthcare organizations with patient data.
-
-**How it works:**
-1. Organization publishes database schemas (structure, NOT data) to a code repository
-2. Terry reads the schema + public compliance standards
-3. Terry builds a complete, compliance-ready tool with data adapters
-4. Organization clones the tool on-network, connects real data, runs security review
-5. No classified data ever leaves the network
-
-**Key insight:** Schemas were never published before because there was no consumer for them. Terry creates the demand side. Publishing a schema now results in a custom tool the next day. This creates a flywheel.
-
-#### Mode 3: Hybrid
-Some data is accessible (public/unclassified), some isn't. Terry works directly with what it can see and builds adapters for what it can't.
-
-**Typical for:** Research institutions, crown corporations, organizations with mixed data classification levels.
+| Mode | Data Access | Typical For |
+|------|------------|-------------|
+| **Mode 2: Schema-Only** (lead) | Schema metadata only — no data | GC federal departments, provincial departments with classified data, healthcare |
+| Mode 1: Full Access | Direct data access | Small municipalities, non-profits, personal use |
+| Mode 3: Hybrid | Mixed — some direct, some schema-only | Research institutions, crown corporations |
 
 ### Who It Serves
 
-The CDR is NOT just for the Government of Canada. It serves:
-
-- **GC Federal departments** — Protected B compliance, ITSG-33, bilingual requirements
-- **Provincial/territorial governments** — Province-specific accessibility and security standards
-- **Municipalities** — Open data, citizen-facing tools, lighter compliance frameworks
-- **Universities and research institutions** — Research data management, mixed classification
-- **Healthcare organizations** — PHIPA, PIPEDA, HL7/FHIR interoperability
-- **Crown corporations** — Hybrid government/commercial requirements
-- **Private sector** — Industry-specific compliance, PIPEDA
-- **Non-profits and community organizations** — Accessibility, open source, limited budgets
-
-Each organization type has a **compliance profile** that terry loads during onboarding. The profile tells terry what standards to follow, what certifications to meet, and what the hard lines are.
+GC Federal departments, provincial/territorial governments, municipalities, universities, healthcare organizations, crown corporations, private sector, non-profits. Each organization type has a **compliance profile** that terry loads during onboarding.
 
 ---
 
 ## Core Principles
 
-Every CDR node follows these six principles. They are non-negotiable.
-
 1. **Know your context.** Understand your security environment and never exceed your clearance.
 2. **Sovereign.** Run locally. Your human's data stays on your human's terms.
-3. **Compliant by default.** Match your output to your institution's standards, whatever those are.
+3. **Compliant by default.** Match your output to your institution's standards.
 4. **Transparent.** Your code is readable. Your process is explainable.
-5. **Part of the Railway.** HQ and other nodes are your network.
-6. **Trust but verify.** NEVER take data classification at face value. Independently verify. Terry is the last line of defence before a compliance breach.
+5. **Part of the Railway.** The recipe index is your network. Share what you learn.
+6. **Trust but verify.** NEVER take data classification at face value. Terry is the last line of defence.
 
 See `principles.md` for the full expanded principles.
 
 ---
 
-## The Bootstrap: How a Node Gets Born
+## Try the Prototype
 
-Every CDR node starts with `BOOTSTRAP.md` — a structured onboarding conversation between terry and its human. Over ~15 minutes, the bootstrap:
+```bash
+cd prototypes/org-chart-demo
+pip install -r requirements.txt
+python main.py          # Web UI at http://localhost:8000
+python main.py --cli    # Terminal output
+```
 
-1. **Meets the human** — learns their name, role, organization, and pain points
-2. **Maps the environment** — discovers systems, tech stack, data sources, security context
-3. **Detects the operating mode** — determines Mode 1, 2, or 3 based on the security context
-4. **Independently verifies** — checks network environment, scans for sensitive data patterns, looks up org security policies (trust but verify)
-5. **Briefings the human** — explains how they'll work together, adapted to the detected mode
-6. **Proposes a first mission** — a concrete first project based on the human's pain points
-7. **Establishes identity** — names the node, generates SOUL.md, CONTEXT.md, and FIRST_MISSION.md
-8. **Deletes itself** — the bootstrap is consumed. Terry is born.
-
-The bootstrap is simultaneously: configuring terry, educating the human, and proving value.
+Reads the synthetic PeopleSoft HR schema and renders a bilingual org-chart with placeholder data. No real data needed.
 
 ---
 
@@ -119,77 +98,63 @@ cdr/
 ├── README.md                  ← You are here
 ├── BOOTSTRAP.md               ← Node initialization protocol
 ├── principles.md              ← CDR Core Principles (expanded)
+├── docs/
+│   ├── VISION-2026-09.md      ← Sep 2026 vision + roadmap
+│   ├── DTC-ONE-PAGER.md       ← DTC/ISED staffer one-pager
+│   └── CROSS_POLLINATION.md   ← HazeyData patterns → CDR components
+├── nodes/
+│   └── hicc/                  ← Node 1 (HICC) — demo
+│       ├── NODE.md            ← Identity, mode, boundaries
+│       ├── SOUL.md            ← Birth certificate
+│       ├── CONTEXT.md         ← Organizational context
+│       └── FIRST_MISSION.md   ← First mission spec
+├── schemas/
+│   └── demo/
+│       └── hicc-hr-synthetic/ ← Synthetic PeopleSoft HR schema
+├── recipes/
+│   └── gc-org-chart-peoplesoft/ ← First recipe
+├── prototypes/
+│   └── org-chart-demo/        ← Runnable Phase 0 prototype
 ├── profiles/                  ← Compliance profiles by organization type
-│   ├── gc-federal/            ← GC federal departments
-│   │   ├── README.md
-│   │   ├── itsg-33-controls.md
-│   │   ├── wcag-21-aa.md
-│   │   ├── gc-web-standards.md
-│   │   └── gc-code-publishing.md
-│   ├── gc-provincial/         ← Provincial/territorial governments
-│   ├── healthcare/            ← Healthcare organizations
-│   ├── municipal/             ← Municipalities
-│   └── general/               ← Default / no specific framework
+│   └── gc-federal/            ← GC federal departments
 ├── adapters/                  ← Data adapter templates
-│   ├── README.md
 │   ├── peoplesoft-hr.md
-│   ├── sap-finance.md
-│   └── generic-csv.md
-├── setup/                     ← Node setup scripts
-│   ├── README.md
-│   ├── mac-setup.sh
-│   └── linux-setup.sh
+│   └── sap-finance.md
 └── pitch/                     ← Concept and pitch documents
-    ├── concept.md
-    └── hicc-proof-of-concept.md
 ```
-
----
-
-## The ACCORD Connection
-
-The CDR shares architectural DNA with [ACCORD](../accord/), a parallel project that builds rules engines for collective agreements. Where ACCORD encodes labour rules, CDR encodes institutional security policies. Same pattern — different domain:
-
-| | ACCORD | CDR |
-|---|---|---|
-| **Encodes** | Collective agreement rules | Institutional security policies |
-| **Builds** | Labour relations tools | Compliant software tools |
-| **For** | HR professionals, union reps | Developers, data analysts, IT teams |
-| **Standards** | Collective agreements | ITSG-33, PHIPA, WCAG, etc. |
-
----
-
-## Getting Started
-
-### For Humans
-
-1. Read this document
-2. Run the setup script for your platform (`setup/mac-setup.sh` or `setup/linux-setup.sh`)
-3. Start Ollama with a local model
-4. Give terry `BOOTSTRAP.md` — it'll take it from there
-
-### For Terrys
-
-1. Follow `BOOTSTRAP.md` exactly
-2. Complete all six phases
-3. Generate your SOUL.md, CONTEXT.md, and FIRST_MISSION.md
-4. Delete the bootstrap
-5. Start building
 
 ---
 
 ## Current Status
 
-**Phase: Proof of Concept**
+**Phase: 0 — Concept + First Prototype (Sep 2026)**
 
-- ✅ CDR architecture designed
-- ✅ Bootstrap protocol written
-- ✅ Compliance profiles created (GC Federal, Provincial, Healthcare, Municipal, General)
-- ✅ Adapter templates created (PeopleSoft HR, SAP Finance, Generic CSV)
-- 🔄 HICC proof of concept in progress (schema publication approval pending)
-- 🔜 First external node deployment
-- 🔜 Demo for deputy ministers
+- ✅ CDR architecture designed (3 operating modes, compliance profiles, adapter system)
+- ✅ Bootstrap protocol written (BOOTSTRAP.md — 6-phase onboarding)
+- ✅ Sep 2026 vision reframe (Mode 2 lead, recipe index, terry-first)
+- ✅ Node 1 demo (HICC — synthetic configuration)
+- ✅ Synthetic PeopleSoft HR schema
+- ✅ First recipe (gc-org-chart-peoplesoft)
+- ✅ Runnable prototype (org-chart-demo)
+- ✅ DTC one-pager
+- 🔜 HICC schema publication approval (real schema, formal pilot)
+- 🔜 First live node deployment
+
+**No active infrastructure.** CDR is documentation, architecture, and one prototype at this stage. No servers, no databases, no crons.
 
 ---
 
-*The Canadian Digital Railway — sovereign AI for Canadian institutions.* 🚂
+## Landscape Position
+
+CDR complements — does not replace — existing Canadian AI infrastructure:
+
+- **GC AI Platform** — serves cloud-ready workloads; CDR serves the on-premise, Protected B workloads that can't go to cloud
+- **SSC** — provides infrastructure; CDR provides the AI agent layer on top
+- **SCIP** — shared cloud; CDR nodes can run on SCIP infra with the recipe layer added
+- **DGX Spark / Faraday appliances** — optional hosting hardware for a terry; not the CDR brand
+
+CDR's whitespace: locally owned node network + Mode 2 schema-only pattern + recipe index + auditable compliance profiles.
+
+---
+
+*The Canadian Digital Railway — sovereign AI for Canadian institutions.*

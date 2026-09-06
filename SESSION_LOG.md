@@ -1,6 +1,6 @@
 # SESSION_LOG — Canadian Digital Railway (CDR)
 
-**Last updated:** 2026-04-02 ~22:00 UTC by Barney (Session 2)
+**Last updated:** 2026-09-06 ~03:00 UTC by Barney (Session 3)
 **Purpose:** When starting a new chat with Barney for CDR, point him here first.
 **Location:** `hazeydata/cdr/SESSION_LOG.md` (canonical)
 
@@ -43,8 +43,8 @@
 
 ## Current State
 
-**Phase:** Proof of Concept / Pre-Revenue
-**Last repo activity:** 2026-04-02 (Session 2 — cross-pollination map)
+**Phase:** Phase 0 — Concept + First Prototype
+**Last repo activity:** 2026-09-06 (Session 3 — Phase 0 reframe)
 **Discord channel:** `#cdr` — `1482123040140824657`
 
 **Completed:**
@@ -60,18 +60,36 @@
 - HICC Open Source Code Publishing Guidelines added as reference
 - Cross-pollination map created (docs/CROSS_POLLINATION.md) — maps HazeyData patterns to CDR components
 - HICC Homelessness Dashboard built (Mode 2 / off-network) — Barney + Fred, outside Dino/Wilma scope
+- **Sep 2026 Phase 0 reframe** — vision, Node 1 demo, synthetic schema, first recipe, runnable prototype, DTC one-pager
+- **Synthetic PeopleSoft HR schema** — `schemas/demo/hicc-hr-synthetic/schema.yaml`
+- **First recipe** — `recipes/gc-org-chart-peoplesoft/RECIPE.md` (org-chart from PeopleSoft HR)
+- **Runnable prototype** — `prototypes/org-chart-demo/` (Python, schema → bilingual org-chart)
+- **DTC one-pager** — `docs/DTC-ONE-PAGER.md`
 
 **Pending:**
-- HICC Workplace BI tool (schema publication approval pending — may move when Fred returns Tuesday)
-- First external node deployment
-- Demo for deputy ministers
-- No cron jobs, no pipelines, no API — this is concept stage
+- HICC schema publication approval (real schema for live pilot)
+- First live node deployment
+- Second department forks the org-chart recipe
+- No cron jobs, no pipelines, no API — this is concept + prototype stage
 
-**No active infrastructure.** CDR has no server processes, no database, no crons. It's documentation and architecture at this stage.
+**No active infrastructure.** CDR has no server processes, no database, no crons. One runnable prototype exists (`prototypes/org-chart-demo/`).
 
 ---
 
 ## Last Session Summary
+
+**Session 3 (2026-09-06) — Phase 0 Reframe**
+- Full Sep 2026 vision reframe: terry-first, Mode 2 lead, recipe index, soft-pedal hardware
+- Created `docs/VISION-2026-09.md` — reworked vision with keep/cut table, landscape, DTC fit, roadmap
+- Created Node 1 (HICC) demo: `nodes/hicc/` — NODE.md, SOUL.md, CONTEXT.md, FIRST_MISSION.md
+- Created synthetic PeopleSoft HR schema: `schemas/demo/hicc-hr-synthetic/schema.yaml`
+- Created first recipe: `recipes/gc-org-chart-peoplesoft/RECIPE.md`
+- Created runnable prototype: `prototypes/org-chart-demo/` — Python app, schema → bilingual org-chart
+- Created DTC one-pager: `docs/DTC-ONE-PAGER.md`
+- Updated README.md with Phase 0 links and corrected status
+- Landscape encoding: SCIP, GC AI Platform, Cohere, TELUS/OpenText, DGX Spark acknowledged; CDR positioned in whitespace (Mode 2 + recipes + local nodes)
+- NemoClaw/DGX soft-pedaled to optional engine, not brand
+- No overclaims: no GC accreditation, no endorsements, all demo data clearly labeled synthetic
 
 **Session 2 (2026-04-02) — Cross-Pollination + Strategic Direction**
 - Fred's key insight: each HazeyData project is a pseudo-node; mine existing code as CDR fodder
@@ -91,7 +109,8 @@
 
 | Item | Status | Details |
 |------|--------|---------|
-| HICC Workplace BI PoC | Pending | Schema publication approval — Fred following up Tuesday |
+| Phase 0 reframe | Complete | Vision, Node 1 demo, schema, recipe, prototype, DTC one-pager |
+| HICC schema publication | Pending | Real schema needed for live pilot — Fred to follow up |
 | HICC Homelessness Dashboard | Built | Mode 2 build by Barney + Fred (outside Dino/Wilma) |
 | Cross-pollination inventory | Complete | `docs/CROSS_POLLINATION.md` committed |
 
@@ -99,18 +118,18 @@
 
 ## Next Actions (Priority Order)
 
-1. **HICC Workplace BI schema publication** — Fred to follow up Tuesday. This is still the critical gate for formal PoC.
-2. **Package HICC Homelessness Dashboard as CDR case study** — needs HICC permission. This is the strongest demo material.
-3. **When building CDR-OS:** Use CROSS_POLLINATION.md as extraction inventory — start with Playbook → Terry onboarding, ACCORD → compliance engine.
-4. **Explore ACCORD ↔ CDR shared compliance engine** — open question from cross-pollination analysis.
-5. **Review v3 pitch decks** — update if needed for upcoming meetings.
-6. **Consider Phase 0 stack decisions** — Ollama wrapper, default model (Qwen3 vs Llama 4 Scout), Terry UI approach. Not urgent until HICC gate clears or Fred decides to build ahead of it.
+1. **Fred reviews Phase 0 PR** — vision, Node 1 demo, synthetic schema, recipe, prototype, DTC one-pager. Merge when satisfied.
+2. **HICC schema publication** — Fred to follow up with HICC IT. Real PeopleSoft HR schema (structure only) unlocks the live pilot.
+3. **Share DTC one-pager** — `docs/DTC-ONE-PAGER.md` ready for DTC/ISED staffers.
+4. **Package HICC Homelessness Dashboard as CDR case study** — needs HICC permission. Strongest existing demo material.
+5. **When building CDR-OS:** Use CROSS_POLLINATION.md as extraction inventory — start with Playbook → Terry onboarding, ACCORD → compliance engine.
+6. **Consider Phase 1 stack decisions** — Ollama wrapper, default model, Terry UI approach. After HICC gate clears.
 
 ---
 
 ## Blockers
 
-- **HICC Workplace BI schema publication approval** — the formal PoC depends on this. May move Tuesday.
+- **HICC schema publication approval** — the live pilot depends on HICC IT publishing PeopleSoft HR table structures (schema only, no data).
 - **HICC permission to use Homelessness Dashboard as case study** — needed to package as CDR demo material.
 
 ---
@@ -123,9 +142,13 @@
 | Adapter templates | 3 (PeopleSoft HR, SAP Finance, Generic CSV) | S1 |
 | External nodes deployed | 0 | S1 |
 | Revenue | $0 (pre-revenue) | S1 |
-| v3 pitch decks | 2 (Executive + Technical Architecture) | S1 |
+| v3 pitch decks | 2 (Executive + Technical Architecture) — archived, replaced by DTC one-pager | S3 |
 | HazeyData patterns mapped to CDR | 15+ (see CROSS_POLLINATION.md) | S2 |
 | De facto Mode 2 demos | 1 (HICC Homelessness Dashboard) | S2 |
+| Solution recipes | 1 (gc-org-chart-peoplesoft) | S3 |
+| Synthetic schemas | 1 (hicc-hr-synthetic) | S3 |
+| Runnable prototypes | 1 (org-chart-demo) | S3 |
+| Demo node cards | 1 (HICC — Node 1) | S3 |
 
 ---
 
@@ -136,6 +159,10 @@
 | 2026-04-02 | S1 | Set up CDR on Claude Desktop with standard HazeyData project structure | Fred + Barney |
 | 2026-04-02 | S2 | Treat each HazeyData project as a pseudo-node; mine patterns for CDR-OS | Fred |
 | 2026-04-02 | S2 | HICC Homelessness Dashboard is the strongest CDR demo material | Barney |
+| 2026-09-06 | S3 | Phase 0 reframe: terry-first, Mode 2 lead, recipe index, soft-pedal hardware | Fred |
+| 2026-09-06 | S3 | NemoClaw/DGX = optional engine, not the CDR brand | Fred |
+| 2026-09-06 | S3 | Archive v3 pitch decks; replace with DTC one-pager for Phase 0 | Fred |
+| 2026-09-06 | S3 | HICC as Node 1 (demo) — synthetic configuration for prototype | Fred |
 
 ---
 

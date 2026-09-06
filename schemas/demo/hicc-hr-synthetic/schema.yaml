@@ -1,0 +1,339 @@
+# Synthetic HICC-like PeopleSoft HR Schema
+# STATUS: DEMO / SYNTHETIC — NOT REAL HICC DATA
+#
+# Inspired by publicly documented Oracle PeopleSoft HCM 9.x patterns
+# and the CDR adapter template (adapters/peoplesoft-hr.md).
+# Does not contain or claim to contain real HICC data structures.
+
+version: "1.0"
+status: synthetic-demo
+source: public-peoplesoft-hcm-docs
+organization: HICC (synthetic)
+notice: >
+  This schema is entirely synthetic. It is inspired by publicly available
+  Oracle PeopleSoft HCM documentation and does not reproduce any real
+  institutional database schema. No Protected B or classified information.
+
+tables:
+  - name: PS_PERSONAL_DATA
+    description: Employee master record — core identity fields
+    classification: Protected B (in production — this demo has no real data)
+    primary_key: [EMPLID]
+    columns:
+      - name: EMPLID
+        type: VARCHAR(11)
+        nullable: false
+        description: Employee ID — primary key for most HR joins
+      - name: NAME
+        type: VARCHAR(50)
+        nullable: false
+        description: "Full name (format: Last,First Middle)"
+      - name: LAST_NAME
+        type: VARCHAR(30)
+        nullable: false
+        description: Last name
+      - name: FIRST_NAME
+        type: VARCHAR(30)
+        nullable: false
+        description: First name
+      - name: NAME_PREFIX
+        type: VARCHAR(4)
+        nullable: true
+        description: Prefix (Mr, Ms, Dr)
+      - name: LANG_CD
+        type: VARCHAR(3)
+        nullable: true
+        description: Language preference (ENG/FRA for GC)
+
+  - name: PS_JOB
+    description: Job/position record — effective-dated, multiple rows per employee
+    classification: Protected B (in production)
+    primary_key: [EMPLID, EMPL_RCD, EFFDT, EFFSEQ]
+    columns:
+      - name: EMPLID
+        type: VARCHAR(11)
+        nullable: false
+        description: Employee ID
+        references: PS_PERSONAL_DATA.EMPLID
+      - name: EMPL_RCD
+        type: SMALLINT
+        nullable: false
+        description: Employment record number (0 = primary job)
+      - name: EFFDT
+        type: DATE
+        nullable: false
+        description: Effective date of this action
+      - name: EFFSEQ
+        type: SMALLINT
+        nullable: false
+        description: Sequence for multiple actions on same date
+      - name: ACTION
+        type: VARCHAR(3)
+        nullable: false
+        description: "Action code (HIR, PRO, TER, XFR, etc.)"
+      - name: DEPTID
+        type: VARCHAR(10)
+        nullable: false
+        description: Department ID
+        references: PS_DEPT_TBL.DEPTID
+      - name: JOBCODE
+        type: VARCHAR(6)
+        nullable: false
+        description: Job code
+        references: PS_JOBCODE_TBL.JOBCODE
+      - name: POSITION_NBR
+        type: VARCHAR(8)
+        nullable: true
+        description: Position number
+      - name: LOCATION
+        type: VARCHAR(10)
+        nullable: true
+        description: Location code
+        references: PS_LOCATION_TBL.LOCATION
+      - name: BUSINESS_UNIT
+        type: VARCHAR(5)
+        nullable: false
+        description: Business unit
+      - name: EMPL_STATUS
+        type: CHAR(1)
+        nullable: false
+        description: "Status (A=Active, I=Inactive, T=Terminated, R=Retired)"
+      - name: FULL_PART_TIME
+        type: CHAR(1)
+        nullable: true
+        description: "Full/Part time (F/P)"
+      - name: REG_TEMP
+        type: CHAR(1)
+        nullable: true
+        description: "Regular/Temporary (R/T)"
+      - name: GRADE
+        type: VARCHAR(3)
+        nullable: true
+        description: Pay grade (e.g. CS-02, AS-05)
+      - name: SUPERVISOR_ID
+        type: VARCHAR(11)
+        nullable: true
+        description: Supervisor employee ID
+        references: PS_PERSONAL_DATA.EMPLID
+      - name: REPORTS_TO
+        type: VARCHAR(8)
+        nullable: true
+        description: Reports-to position number
+
+  - name: PS_DEPT_TBL
+    description: Department hierarchy — effective-dated reference table
+    classification: Unclassified (structural metadata)
+    primary_key: [SETID, DEPTID, EFFDT]
+    columns:
+      - name: SETID
+        type: VARCHAR(5)
+        nullable: false
+        description: Set ID
+      - name: DEPTID
+        type: VARCHAR(10)
+        nullable: false
+        description: Department ID
+      - name: EFFDT
+        type: DATE
+        nullable: false
+        description: Effective date
+      - name: DESCR
+        type: VARCHAR(30)
+        nullable: false
+        description: Department name (English)
+      - name: DESCRSHORT
+        type: VARCHAR(10)
+        nullable: true
+        description: Short department name
+      - name: MANAGER_ID
+        type: VARCHAR(11)
+        nullable: true
+        description: Manager employee ID
+        references: PS_PERSONAL_DATA.EMPLID
+      - name: LOCATION
+        type: VARCHAR(10)
+        nullable: true
+        description: Default location
+        references: PS_LOCATION_TBL.LOCATION
+
+  - name: PS_JOBCODE_TBL
+    description: Job code definitions — maps codes to titles and grades
+    classification: Unclassified (structural metadata)
+    primary_key: [SETID, JOBCODE, EFFDT]
+    columns:
+      - name: SETID
+        type: VARCHAR(5)
+        nullable: false
+        description: Set ID
+      - name: JOBCODE
+        type: VARCHAR(6)
+        nullable: false
+        description: Job code
+      - name: EFFDT
+        type: DATE
+        nullable: false
+        description: Effective date
+      - name: DESCR
+        type: VARCHAR(30)
+        nullable: false
+        description: Job title (English)
+      - name: DESCRFRA
+        type: VARCHAR(30)
+        nullable: true
+        description: Job title (French) — GC bilingual requirement
+      - name: SAL_ADMIN_PLAN
+        type: VARCHAR(4)
+        nullable: true
+        description: Salary administration plan
+      - name: GRADE
+        type: VARCHAR(3)
+        nullable: true
+        description: Default pay grade
+
+  - name: PS_LOCATION_TBL
+    description: Location reference data
+    classification: Unclassified (structural metadata)
+    primary_key: [SETID, LOCATION, EFFDT]
+    columns:
+      - name: SETID
+        type: VARCHAR(5)
+        nullable: false
+        description: Set ID
+      - name: LOCATION
+        type: VARCHAR(10)
+        nullable: false
+        description: Location code
+      - name: EFFDT
+        type: DATE
+        nullable: false
+        description: Effective date
+      - name: DESCR
+        type: VARCHAR(30)
+        nullable: false
+        description: Location name (English)
+      - name: DESCRFRA
+        type: VARCHAR(30)
+        nullable: true
+        description: Location name (French)
+      - name: CITY
+        type: VARCHAR(30)
+        nullable: true
+        description: City
+      - name: STATE
+        type: VARCHAR(6)
+        nullable: true
+        description: Province code
+      - name: POSTAL
+        type: VARCHAR(12)
+        nullable: true
+        description: Postal code
+
+  - name: PS_EMPLOYMENT
+    description: Employment record — hire/termination dates
+    classification: Protected B (in production)
+    primary_key: [EMPLID, EMPL_RCD]
+    columns:
+      - name: EMPLID
+        type: VARCHAR(11)
+        nullable: false
+        description: Employee ID
+        references: PS_PERSONAL_DATA.EMPLID
+      - name: EMPL_RCD
+        type: SMALLINT
+        nullable: false
+        description: Employment record number
+      - name: HIRE_DT
+        type: DATE
+        nullable: true
+        description: Original hire date
+      - name: REHIRE_DT
+        type: DATE
+        nullable: true
+        description: Most recent rehire date
+      - name: TERMINATION_DT
+        type: DATE
+        nullable: true
+        description: Termination date
+      - name: LAST_DATE_WORKED
+        type: DATE
+        nullable: true
+        description: Last date worked
+
+relationships:
+  - name: employee_job
+    from: PS_JOB.EMPLID
+    to: PS_PERSONAL_DATA.EMPLID
+    type: many-to-one
+    description: Each job record belongs to one employee
+
+  - name: job_department
+    from: PS_JOB.DEPTID
+    to: PS_DEPT_TBL.DEPTID
+    type: many-to-one
+    description: Each job record references a department
+
+  - name: job_code_lookup
+    from: PS_JOB.JOBCODE
+    to: PS_JOBCODE_TBL.JOBCODE
+    type: many-to-one
+    description: Each job record references a job code definition
+
+  - name: job_location
+    from: PS_JOB.LOCATION
+    to: PS_LOCATION_TBL.LOCATION
+    type: many-to-one
+    description: Each job record references a location
+
+  - name: supervisor_chain
+    from: PS_JOB.SUPERVISOR_ID
+    to: PS_PERSONAL_DATA.EMPLID
+    type: many-to-one
+    description: Supervisor relationship — builds the org-chart hierarchy
+
+  - name: dept_manager
+    from: PS_DEPT_TBL.MANAGER_ID
+    to: PS_PERSONAL_DATA.EMPLID
+    type: many-to-one
+    description: Department manager relationship
+
+  - name: employment_employee
+    from: PS_EMPLOYMENT.EMPLID
+    to: PS_PERSONAL_DATA.EMPLID
+    type: many-to-one
+    description: Employment record belongs to one employee
+
+gc_reference_data:
+  action_codes:
+    - {code: HIR, description: Hire}
+    - {code: REH, description: Rehire}
+    - {code: PRO, description: Promotion}
+    - {code: DEM, description: Demotion}
+    - {code: TER, description: Termination}
+    - {code: RET, description: Retirement}
+    - {code: XFR, description: Transfer}
+    - {code: LOA, description: Leave of Absence}
+    - {code: RFL, description: Return from Leave}
+    - {code: PAY, description: Pay Rate Change}
+    - {code: POS, description: Position Change}
+
+  employee_status_codes:
+    - {code: A, description: Active}
+    - {code: I, description: Inactive}
+    - {code: T, description: Terminated}
+    - {code: R, description: Retired}
+    - {code: D, description: Deceased}
+    - {code: S, description: Suspended}
+    - {code: L, description: Leave of Absence}
+    - {code: P, description: Leave With Pay}
+    - {code: Q, description: Leave Without Pay}
+
+  gc_classification_groups:
+    - {code: CS, description: Computer Systems (IT)}
+    - {code: EX, description: Executive}
+    - {code: AS, description: Administrative Services}
+    - {code: PM, description: Programme Administration}
+    - {code: EC, description: Economics}
+    - {code: FI, description: Financial Management}
+    - {code: PE, description: Personnel Administration}
+    - {code: IS, description: Information Services}
+    - {code: CR, description: Clerical and Regulatory}
